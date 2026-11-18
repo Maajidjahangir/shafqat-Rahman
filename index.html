@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Shafqat 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--pink:#f472b6;--purple:#a78bfa;--gold:#fbbf24;--coral:#fb7185}
+html,body{width:100%;height:100%;font-family:'Inter',sans-serif;overflow:hidden}
+body{background:#0f172a}
+#confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:999}
+.page{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;opacity:0;pointer-events:none;transition:opacity .7s ease,transform .7s ease;transform:translateY(30px);padding:2rem;text-align:center;overflow-y:auto}
+.page.active{opacity:1;pointer-events:all;transform:translateY(0)}
+.page.exit{opacity:0;transform:translateY(-30px)}
+#p1{background:linear-gradient(135deg,#1a0533 0%,#2d0a5e 40%,#1a0533 100%)}
+#p1 .stars{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+#p1 .star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d,3s) ease-in-out infinite var(--delay,0s)}
+@keyframes twinkle{0%,100%{opacity:.1;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
+.lock-icon{font-size:4rem;margin-bottom:1rem;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.greeting-small{font-size:.85rem;letter-spacing:.25em;text-transform:uppercase;color:var(--purple);margin-bottom:.6rem}
+.big-name{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,9vw,5.5rem);background:linear-gradient(90deg,#f9a8d4,#c084fc,#f9a8d4);background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 4s linear infinite;line-height:1.1;margin-bottom:.4rem}
+@keyframes shimmer{to{background-position:200% center}}
+.big-name span{font-style:italic}
+.tagline{font-size:1rem;color:rgba(255,255,255,.55);margin-bottom:2.5rem;font-weight:300;max-width:350px}
+.btn-next{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 2.4rem;border:none;border-radius:50px;cursor:pointer;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:500;letter-spacing:.04em;background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;box-shadow:0 0 30px rgba(244,114,182,.5);transition:transform .2s,box-shadow .2s}
+.btn-next:hover{transform:scale(1.05);box-shadow:0 0 45px rgba(244,114,182,.7)}
+.restart-btn{background:transparent;border:1.5px solid rgba(251,191,36,.4);color:var(--gold);box-shadow:none}
+.restart-btn:hover{box-shadow:0 0 25px rgba(251,191,36,.3)}
+.floating-emojis span{position:absolute;font-size:1.6rem;animation:floatUp var(--ft,6s) ease-in-out infinite var(--fd,0s);opacity:.5}
+@keyframes floatUp{0%{transform:translateY(0) rotate(0deg);opacity:.3}50%{opacity:.7}100%{transform:translateY(-120px) rotate(20deg);opacity:0}}
+#p2{background:linear-gradient(160deg,#0f172a 0%,#1e1033 60%,#0f172a 100%)}
+.cake-container{position:relative;margin-bottom:1.5rem}
+.cake-emoji{font-size:6rem;display:block;animation:cakeBounce 2s ease-in-out infinite}
+@keyframes cakeBounce{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+.glow-ring{position:absolute;top:50%;left:50%;width:120px;height:120px;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(251,191,36,.3) 0%,transparent 70%);animation:glowPulse 2s ease-in-out infinite}
+@keyframes glowPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6}50%{transform:translate(-50%,-50%) scale(1.3);opacity:1}}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,3rem);color:#fff;margin-bottom:.5rem}
+.section-sub{font-size:.9rem;color:rgba(255,255,255,.45);margin-bottom:2rem;font-weight:300;max-width:320px;line-height:1.6}
+.age-badge{display:inline-block;background:linear-gradient(135deg,var(--gold),#f97316);color:#1a0533;font-size:1.1rem;font-weight:700;padding:.4rem 1.4rem;border-radius:50px;margin-bottom:1.8rem;box-shadow:0 0 20px rgba(251,191,36,.5);letter-spacing:.05em}
+.wishes-row{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;max-width:400px;margin-bottom:2rem}
+.wish-pill{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.75);font-size:.8rem;padding:.4rem 1rem;border-radius:50px;backdrop-filter:blur(8px);transition:background .2s}
+.wish-pill:hover{background:rgba(255,255,255,.15)}
+#p3{background:linear-gradient(145deg,#0d1117 0%,#1a2744 50%,#0d1117 100%)}
+.memory-card-wrap{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;max-width:380px;width:100%;margin-bottom:1.8rem}
+.memory-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:1rem;backdrop-filter:blur(10px);transition:transform .3s,border-color .3s}
+.memory-card:hover{transform:scale(1.04);border-color:var(--pink)}
+.memory-card .emoji{font-size:1.8rem;margin-bottom:.4rem}
+.memory-card .label{font-size:.72rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em}
+.memory-card .value{font-size:.9rem;color:rgba(255,255,255,.85);font-weight:500;margin-top:.15rem}
+.quote-block{background:rgba(244,114,182,.08);border-left:3px solid var(--pink);border-radius:0 12px 12px 0;padding:1rem 1.2rem;max-width:360px;margin-bottom:2rem;text-align:left}
+.quote-block p{font-size:.9rem;color:rgba(255,255,255,.7);font-style:italic;line-height:1.7}
+#p4{background:linear-gradient(145deg,#101827 0%,#25113d 55%,#101827 100%)}
+.request-icon{font-size:4.5rem;margin-bottom:1rem;animation:pulse 2s ease-in-out infinite}
+.request-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,3.5rem);color:#fff;margin-bottom:.8rem}
+.request-text{font-size:.95rem;color:rgba(255,255,255,.65);max-width:340px;line-height:1.7;margin-bottom:1.5rem}
+.request-note{font-size:.8rem;color:rgba(255,255,255,.35);max-width:300px;line-height:1.6;margin-bottom:2rem}
+.request-buttons{display:flex;flex-direction:column;gap:.8rem;width:min(320px,90vw)}
+.response-btn{width:100%;padding:.9rem 1.2rem;border-radius:50px;cursor:pointer;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:500;transition:transform .2s,background .2s}
+.response-btn:hover{transform:scale(1.03)}
+.yes-btn{border:none;background:linear-gradient(135deg,#f472b6,#a78bfa);color:white}
+.maybe-btn{border:1px solid rgba(167,139,250,.5);background:rgba(167,139,250,.08);color:#c4b5fd}
+.no-btn{border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:rgba(255,255,255,.65)}
+.response-message{display:none;max-width:330px;margin-top:1.5rem;padding:1rem 1.2rem;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.75);font-size:.85rem;line-height:1.6}
+#p5{background:radial-gradient(ellipse at center,#2d0a5e 0%,#1a0533 60%)}
+.final-emoji{font-size:5rem;margin-bottom:1rem;animation:spin 8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.final-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(2rem,7vw,4rem);background:linear-gradient(90deg,var(--gold),var(--pink),var(--purple));background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 3s linear infinite;margin-bottom:.6rem;line-height:1.2}
+.final-msg{font-size:.95rem;color:rgba(255,255,255,.6);max-width:320px;line-height:1.7;margin-bottom:2.2rem;font-weight:300}
+.heart-row{display:flex;gap:.5rem;justify-content:center;margin-bottom:2rem}
+.heart-row span{font-size:1.4rem;animation:heartBeat 1.2s ease-in-out infinite}
+.heart-row span:nth-child(2){animation-delay:.15s}
+.heart-row span:nth-child(3){animation-delay:.3s}
+@keyframes heartBeat{0%,100%{transform:scale(1)}14%{transform:scale(1.3)}28%{transform:scale(1)}42%{transform:scale(1.15)}70%{transform:scale(1)}}
+.dots{position:fixed;bottom:1.6rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem;z-index:100}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2);transition:background .3s,transform .3s}
+.dot.active{background:var(--pink);transform:scale(1.4)}
+.from-tag{position:fixed;top:1rem;right:1.2rem;font-size:.7rem;color:rgba(255,255,255,.2);letter-spacing:.1em;text-transform:uppercase;z-index:100}
+@media(max-height:700px){.page{padding-top:1rem;padding-bottom:1rem}.lock-icon{font-size:3rem;margin-bottom:.5rem}.cake-emoji{font-size:4.5rem}.cake-container{margin-bottom:.7rem}.memory-card{padding:.7rem}.quote-block{margin-bottom:1rem}.request-icon{font-size:3.5rem}.final-emoji{font-size:3.5rem}}
+</style>
+</head>
+
+<body>
+<canvas id="confetti-canvas"></canvas>
+<div class="from-tag">A little birthday surprise ✨</div>
+
+<div class="dots">
+  <div class="dot active" id="dot-0"></div>
+  <div class="dot" id="dot-1"></div>
+  <div class="dot" id="dot-2"></div>
+  <div class="dot" id="dot-3"></div>
+  <div class="dot" id="dot-4"></div>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <div class="stars" id="stars"></div>
+  <div class="floating-emojis" id="floaters"></div>
+  <div class="lock-icon">🎁</div>
+  <p class="greeting-small">A little birthday wish for Shafqat</p>
+  <h1 class="big-name">Happy<br><span>Birthday, Shafqat!</span></h1>
+  <p class="tagline">A little surprise, just to add a smile to your special day. ✨</p>
+  <button class="btn-next" onclick="goTo(1)">Open Gift &nbsp;→</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <div class="cake-container">
+    <div class="glow-ring"></div>
+    <span class="cake-emoji">🎂</span>
+  </div>
+  <p class="greeting-small">Your day, your moment</p>
+  <h2 class="section-title">Have a Beautiful Birthday, Shafqat!</h2>
+  <p class="section-sub">May your day be filled with genuine smiles, lovely surprises and moments worth remembering.</p>
+  <div class="age-badge">🎉 It's Your Day! 🎉</div>
+  <div class="wishes-row">
+    <span class="wish-pill">✨ Happiness</span>
+    <span class="wish-pill">💫 Success</span>
+    <span class="wish-pill">🌸 Peace</span>
+    <span class="wish-pill">☀️ Good Health</span>
+    <span class="wish-pill">🌟 New Opportunities</span>
+    <span class="wish-pill">🦋 Beautiful Memories</span>
+  </div>
+  <button class="btn-next" onclick="goTo(2)">Read Your Note &nbsp;→</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <p class="greeting-small">A few words for your special day</p>
+  <h2 class="section-title">A Birthday Note for You, Shafqat 🌸</h2>
+
+  <div class="memory-card-wrap">
+    <div class="memory-card">
+      <div class="emoji">😊</div>
+      <div class="label">Wishing you</div>
+      <div class="value">Endless smiles</div>
+    </div>
+    <div class="memory-card">
+      <div class="emoji">🌙</div>
+      <div class="label">More of</div>
+      <div class="value">Peace & calm</div>
+    </div>
+    <div class="memory-card">
+      <div class="emoji">✨</div>
+      <div class="label">Keep chasing</div>
+      <div class="value">Your dreams</div>
+    </div>
+    <div class="memory-card">
+      <div class="emoji">🌸</div>
+      <div class="label">Never lose</div>
+      <div class="value">Your individuality</div>
+    </div>
+  </div>
+
+  <div class="quote-block">
+    <p>"It's always nice to come across someone with whom even a few conversations can bring a smile. I'm glad our paths crossed. May life bring you countless reasons to smile, wonderful opportunities and beautiful experiences. Keep being yourself, Shafqat. 🌸"</p>
+  </div>
+
+  <button class="btn-next" onclick="goTo(3)">One Little Request &nbsp;→</button>
+</div>
+
+<!-- PAGE 4 : MEETING REQUEST -->
+<div class="page" id="p4">
+  <div class="request-icon">🌸</div>
+  <p class="greeting-small">One little birthday wish</p>
+  <h2 class="request-title">Can I Ask You Something, Shafqat? 😊</h2>
+
+  <p class="request-text">
+    If you're comfortable, I'd love to meet you sometime and celebrate your birthday with a little cake cutting. Nothing fancy — just a simple moment, some good conversation and a few smiles. 🎂✨
+  </p>
+
+  <p class="request-note">
+    Only if you're comfortable, of course. No pressure at all. Your comfort matters, and I completely understand either way. 😊
+  </p>
+
+  <p class="request-note" id="chooseLine">Choose whichever feels right for you 👇</p>
+
+  <div class="request-buttons">
+    <button class="response-btn yes-btn" onclick="showResponse('yes')">❤️ Yes, that sounds nice 😊</button>
+    <button class="response-btn maybe-btn" onclick="showResponse('maybe')">🤔 Maybe, I'll let you know</button>
+    <button class="response-btn no-btn" onclick="showResponse('no')">Not this time, sorry 🌸</button>
+  </div>
+
+  <div class="response-message" id="responseMessage"></div>
+  <button class="btn-next" style="margin-top:1.5rem;" onclick="goTo(4)">Continue →</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="p5">
+  <div class="final-emoji">🌟</div>
+  <h2 class="final-title">Happy Birthday, Shafqat! 🎂</h2>
+
+  <p class="final-msg">
+    May this new chapter of your life bring you peace, good health, success in everything you work towards and happiness in the little things. May your dreams find their way to reality and may you always have reasons to smile. Have a wonderful year ahead! ✨
+  </p>
+
+  <div class="heart-row">
+    <span>✨</span>
+    <span>🌸</span>
+    <span>🎂</span>
+  </div>
+
+  <div style="display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;">
+    <button class="btn-next restart-btn" onclick="goTo(0)">↩ Start Over</button>
+    <button class="btn-next" onclick="burstConfetti()">🎊 Celebrate!</button>
+  </div>
+</div>
+
+<script>
+/* STARS */
+const starsEl = document.getElementById('stars');
+for(let i=0;i<80;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  const sz=Math.random()*2.5+1;
+  s.style.cssText=`
+    width:${sz}px;height:${sz}px;
+    top:${Math.random()*100}%;
+    left:${Math.random()*100}%;
+    --d:${2+Math.random()*4}s;
+    --delay:${Math.random()*4}s;
+  `;
+  starsEl.appendChild(s);
+}
+
+/* FLOATING EMOJIS */
+const floaters=document.getElementById('floaters');
+const ems=['🎈','🎀','✨','💫','🌸','⭐','🦋','🌙'];
+for(let i=0;i<10;i++){
+  const e=document.createElement('span');
+  e.textContent=ems[Math.floor(Math.random()*ems.length)];
+  e.style.cssText=`
+    left:${Math.random()*90}%;
+    bottom:${Math.random()*30}%;
+    --ft:${5+Math.random()*5}s;
+    --fd:${Math.random()*4}s;
+  `;
+  floaters.appendChild(e);
+}
+
+/* PAGE NAVIGATION */
+let current=0;
+const pages=document.querySelectorAll('.page');
+const dots=document.querySelectorAll('.dot');
+
+function goTo(idx){
+  if(idx<0||idx>=pages.length)return;
+
+  pages[current].classList.remove('active');
+  pages[current].classList.add('exit');
+  const oldPage=current;
+
+  setTimeout(()=>pages[oldPage].classList.remove('exit'),700);
+
+  dots[current].classList.remove('active');
+  current=idx;
+  pages[current].classList.add('active');
+  dots[current].classList.add('active');
+
+  if(idx===4)setTimeout(burstConfetti,500);
+}
+
+/* RESPONSE UI - FORMSPREE */
+const FORMSPREE_ENDPOINT="https://formspree.io/f/xgawbnye";
+
+function showResponse(type){
+  const box=document.getElementById('responseMessage');
+  const chooseLine=document.getElementById('chooseLine');
+
+  box.style.display='block';
+  if(chooseLine)chooseLine.style.display='none';
+
+  if(type==='yes'){
+    box.textContent='❤️ That would be lovely! 😊 We can keep it simple. Just let me know what works for you. ✨';
+  }
+  if(type==='maybe'){
+    box.textContent='🤔 Absolutely! Take your time. Whenever you feel comfortable, you can let me know. 😊';
+  }
+  if(type==='no'){
+    box.textContent='🌸 No worries at all. I completely respect that. Hope you have a beautiful birthday!';
+  }
+
+  sendChoiceToFormspree(type);
+}
+
+function sendChoiceToFormspree(type){
+  if(!FORMSPREE_ENDPOINT||FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')){
+    console.warn('Formspree endpoint not set yet.');
+    return;
+  }
+
+  fetch(FORMSPREE_ENDPOINT,{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'Accept':'application/json'
+    },
+    body:JSON.stringify({
+      choice:type,
+      message:`Shafqat selected: ${type}`,
+      page:'birthday-site'
+    })
+  }).catch(err=>{
+    console.error('Could not send response to Formspree:',err);
+  });
+}
+
+/* CONFETTI */
+const confettiCanvas=document.getElementById('confetti-canvas');
+const ctx=confettiCanvas.getContext('2d');
+
+function resizeCanvas(){
+  confettiCanvas.width=window.innerWidth;
+  confettiCanvas.height=window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize',resizeCanvas);
+
+function burstConfetti(){
+  const colors=['#f472b6','#a78bfa','#fbbf24','#fb7185','#ffffff'];
+  const particles=[];
+  const count=150;
+
+  for(let i=0;i<count;i++){
+    particles.push({
+      x:Math.random()*confettiCanvas.width,
+      y:-20-Math.random()*100,
+      r:Math.random()*5+4,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      speedY:Math.random()*2.5+2,
+      driftX:Math.random()*2-1,
+      rot:Math.random()*Math.PI*2,
+      spin:Math.random()*.2-.1
+    });
+  }
+
+  let frame=0;
+  const maxFrames=160;
+
+  function draw(){
+    ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+
+    particles.forEach(p=>{
+      p.y+=p.speedY;
+      p.x+=p.driftX;
+      p.rot+=p.spin;
+
+      ctx.save();
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.rot);
+      ctx.fillStyle=p.color;
+      ctx.fillRect(-p.r/2,-p.r/4,p.r,p.r*.6);
+      ctx.restore();
+    });
+
+    frame++;
+    if(frame<maxFrames){
+      requestAnimationFrame(draw);
+    }else{
+      ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+    }
+  }
+  draw();
+}
+</script>
+</body>
+</html>
